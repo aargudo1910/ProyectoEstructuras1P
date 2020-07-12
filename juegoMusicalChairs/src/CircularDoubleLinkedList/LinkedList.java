@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package DoubleLinkedList;
+package CircularDoubleLinkedList;
 
 /**
  *
  * @author Desarrollo
  */
-public interface List {
+public class LinkedList {
     
 }
