@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package proyectoestructuras;
+package Juego;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -17,7 +17,7 @@ import javafx.stage.Stage;
  *
  * @author Desarrollo
  */
-public class ProyectoEstructurasP1 extends Application {
+public class juego extends Application {
     
     @Override
     public void start(Stage primaryStage) {
