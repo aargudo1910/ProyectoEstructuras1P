@@ -19,7 +19,12 @@ public class juego extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
+       
+        Parent root;
+        
+        root = FXMLLoader.load(getClass().getResource("Empezar.fxml"));
+        
+        
         
         Scene scene = new Scene(root);
         
@@ -32,6 +37,7 @@ public class juego extends Application {
      */
     public static void main(String[] args) {
         launch(args);
+        
     }
     
 }

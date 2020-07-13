@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: LightCyan;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Juego.FXMLDocumentController2">
+   <children>
+      <Label fx:id="labelPersonas" layoutX="11.0" layoutY="14.0" text="Ingrese número de personas:">
+         <font>
+            <Font name="Comic Sans MS" size="13.0" />
+         </font>
+      </Label>
+      <ChoiceBox fx:id="comboBox" layoutX="371.0" layoutY="11.0" onMouseClicked="#initialize" prefHeight="19.0" prefWidth="150.0" />
+      <TextField fx:id="TextPersonas" layoutX="187.0" layoutY="14.0" prefHeight="19.0" prefWidth="32.0">
+         <font>
+            <Font size="8.0" />
+         </font>
+      </TextField>
+      <Label fx:id="LabelDireccion" layoutX="236.0" layoutY="14.0" text="Seleccione dirección:">
+         <font>
+            <Font name="Comic Sans MS" size="13.0" />
+         </font>
+      </Label>
+      <Button fx:id="btnSig" layoutX="507.0" layoutY="353.0" mnemonicParsing="false" onAction="#initialize" onMouseClicked="#initialize" text="Ejecutar" />
+      <CheckBox layoutX="14.0" layoutY="357.0" mnemonicParsing="false" text="Música" />
+   </children>
+</Pane>
