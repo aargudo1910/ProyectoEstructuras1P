@@ -50,6 +50,7 @@ public class FXMLDocumentController implements Initializable {
         stage.setScene(scene);
         stage.setTitle("Juego de las sillas");
         stage.show();
+        
     }
 
 

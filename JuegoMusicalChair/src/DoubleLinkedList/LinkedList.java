@@ -31,46 +31,50 @@ public class LinkedList<E> implements List<E> {
         }
     }
     
-    public void addInEmpty(NodeList<E> node){
-        last.setBef(node);
+    public void addInEmpty(NodeList<E> node) {
         last = node;
-        last.getNext().setNext(last);
-        last.setNext(last.getNext());
-        last.getNext().setBef(last);
-        last.setBef(last.getNext());
+        last.setNext(last);
+        last.setBef(last);
         tam++;
     }
     
     @Override
-    public boolean addFirst(E e){ //
+    public boolean addFirst(E e) { 
         NodeList<E> node = new NodeList(e);
-        if(e==null) return false;
-        if(isEmpty()){
+        if (e == null) {
+            return false;
+        }
+        if (isEmpty()) {
             addInEmpty(node);
-        }else{
-            node.setNext(last.getNext());
-            last.getNext().setBef(node);
+        } else {
+            NodeList<E> aux = last.getNext();//guarda el actual primer nodo 
+            node.setNext(aux);
+            aux.setBef(node);
             last.setNext(node);
-            last.getNext().setBef(last);
-            last.setNext(last.getNext());
+            node.setBef(last);
+            
             tam++;
         }
         return true;
     }
-    
+
     @Override
     public boolean addLast(E e) { //
         NodeList node = new NodeList(e);
-        if(e==null) return false;
-        if(isEmpty()){
+        if (e == null) {
+            return false;
+        }
+        if (isEmpty()) {
             addInEmpty(node);
-        }else{
+        } else {
             
-            last.setNext(node);
-            node.setBef(last);
+            NodeList<E> aux = last; //guarda el actual last
+            node.setNext(aux.getNext());
+            node.getNext().setBef(node);
+            aux.setNext(node);
+            node.setBef(aux);
             last = node;
-            last.getNext().setBef(last);
-            last.setNext(last.getNext());
+           
             tam++;
         }
         return true;
