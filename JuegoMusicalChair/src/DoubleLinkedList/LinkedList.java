@@ -82,16 +82,52 @@ public class LinkedList<E> implements List<E> {
 
     @Override
     public E removeFirst() {
-        E content=null;
-       
-        return content;
+        if (isEmpty())return null;
+        else {
+            NodeList<E> nextLast = last.getNext();
+            last.setNext(nextLast.getNext());
+            nextLast.getNext().setBef(last);
+            nextLast.setBef(null);
+            nextLast.setNext(null);
+            tam--;
+            return nextLast.getContent();
+        }
     }
 
     @Override
     public E removeLast() {
-        E content = null;
+        if (isEmpty())return null;
+        else {
+            NodeList<E> Last = last;
+            last = Last.getBef();
+            
+            Last.getNext().setBef(Last.getBef()); 
+            Last.getBef().setNext(Last.getNext());
+            Last.setBef(null);
+            Last.setNext(null);
+            
+            tam--;
+            return Last.getContent();
+        }
+    }
+    
+    public E remove(int index) {
+        if (isEmpty()) return null;
+        else if(index>tam)  return null;
+        else if(index==0)removeFirst();
+        else if(index==size()-1) removeLast();
         
-        return content;
+        else {
+            NodeList<E> n = nodeIndex(index);
+            E content = n.getContent();
+            n.getBef().setNext(n.getNext());
+            n.getNext().setBef(n.getBef());
+            n.setNext(null);
+            n.setBef(null);
+            tam--;
+            return content;
+        }
+        return null;
     }
 
     @Override
@@ -123,19 +159,6 @@ public class LinkedList<E> implements List<E> {
 //        }
         
     }
-
-//    public E remove(int index) {
-////        header = last.getNext();
-////        NodeList<E> n = header;
-////        for(int i=0;i<index-1;i++){
-////            n=n.getNext();
-////        }
-//        NodeList<E> nextN=n.getNext();
-////        n.setNext(nextN.getNext());
-//        E content=nextN.getContent();
-////        nextN=null;
-//        return content;
-//    }
 
     public E get(int index) { //
         E content;
@@ -180,6 +203,18 @@ public class LinkedList<E> implements List<E> {
             result += n.getContent().toString() + ",";
         }
         return result;
+    }
+     private NodeList<E> nodeIndex(int index){
+        if(index>tam) return null;
+        else{
+            NodeList<E> q = last.getNext();
+            int cont = 0;
+            while(index != cont){
+                q = q.getNext();
+                cont++;
+            }
+            return q;
+        }
     }
 
 

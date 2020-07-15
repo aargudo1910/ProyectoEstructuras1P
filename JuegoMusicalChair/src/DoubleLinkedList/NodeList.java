@@ -10,7 +10,7 @@ package DoubleLinkedList;
  * @author Desarrollo
  */
 public class NodeList<E> {
-    private E content; 
+    private E content;
     private NodeList<E> next;
     private NodeList<E> bef;
 
