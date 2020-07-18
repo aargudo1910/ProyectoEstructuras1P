@@ -152,12 +152,26 @@ public class LinkedList<E> implements List<E> {
     
     
     public void add(int index, E element) {
-//        NodeList<E> n;// nodo viajero
-//        header = last.getNext();
-//        for (n = header; n != null; n = n.getNext()) {
-//            n.setContent(null);
-//        }
-        
+        if(element==null || index>tam){
+            // Establecer error
+        }else{
+            if(index==0){
+                addFirst(element);
+            }else if(index==tam) {
+                addLast(element);
+            }else if(index>tam){
+                for(int i=0;i<tam;i++){
+                    if(i==index){
+                        NodeList nuevo = new NodeList(element);
+                        nuevo.setNext(nuevo);
+                        nodeIndex(index).getNext().setBef(nuevo);
+                        nuevo.setBef(nodeIndex(index));
+                        //break;
+                    }
+                }
+            }
+            
+        }
     }
 
     public E get(int index) { //
