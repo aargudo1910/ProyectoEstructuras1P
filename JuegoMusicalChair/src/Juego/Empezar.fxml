@@ -9,7 +9,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="584.0" prefWidth="662.0" style="-fx-background-color: #F0F8FF;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Juego.FXMLDocumentController">
     <children>
-        <Button fx:id="button" defaultButton="true" layoutX="250.0" layoutY="432.0" onAction="#handleButtonAction" style="-fx-background-color: AntiqueWhite;" text="Empieza!">
+        <Button fx:id="button" defaultButton="true" layoutX="250.0" layoutY="434.0" onAction="#handleButtonAction" style="-fx-background-color: AntiqueWhite;" text="Empieza!">
          <font>
             <Font name="System Bold" size="33.0" />
          </font></Button>

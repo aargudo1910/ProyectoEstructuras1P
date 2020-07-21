@@ -5,6 +5,7 @@
  */
 package Juego;
 
+import Sonido.Musica;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -25,15 +26,15 @@ import javafx.stage.Stage;
  * @author Desarrollo
  */
 public class FXMLDocumentController implements Initializable {
-
     @FXML
     private Button button;
     @FXML
     private Label label;
-
+    Musica mus = new Musica();
     /**
      * Initializes the controller class.
      * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -42,7 +43,7 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private void handleButtonAction(ActionEvent event) throws IOException {
-      
+        
         ((Node) (event.getSource())).getScene().getWindow().hide();
         Parent root2 = FXMLLoader.load(getClass().getResource("Juego.fxml"));
         Stage stage = new Stage();
@@ -53,7 +54,5 @@ public class FXMLDocumentController implements Initializable {
         
     }
 
-
-   
     
 }

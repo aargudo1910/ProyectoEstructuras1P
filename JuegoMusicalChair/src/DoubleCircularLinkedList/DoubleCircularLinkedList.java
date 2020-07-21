@@ -149,30 +149,6 @@ public class DoubleCircularLinkedList<E> implements List<E> {
         last.setNext(null);
         last=null;
     }
-    
-    
-    public void add(int index, E element) {
-        if(element==null || index>tam){
-            // Establecer error
-        }else{
-            if(index==0){
-                addFirst(element);
-            }else if(index==tam) {
-                addLast(element);
-            }else if(index>tam){
-                for(int i=0;i<tam;i++){
-                    if(i==index){
-                        NodeList nuevo = new NodeList(element);
-                        nuevo.setNext(nuevo);
-                        nodeIndex(index).getNext().setBef(nuevo);
-                        nuevo.setBef(nodeIndex(index));
-                        //break;
-                    }
-                }
-            }
-            
-        }
-    }
 
     public E get(int index) { //
         E content;
