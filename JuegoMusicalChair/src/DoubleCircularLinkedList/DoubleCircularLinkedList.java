@@ -11,15 +11,16 @@ package DoubleCircularLinkedList;
  * @param <E>
  */
 public class DoubleCircularLinkedList<E> implements List<E> {
-    private int tam = 0;
+    private int tam;
     private NodeList<E> last;
-
+    
     public DoubleCircularLinkedList() {
         this.last = null;
+        tam=0;
     }
     
     
-    public void mostrar_elementos(){
+    public void mostrarElementos(){
         if(!isEmpty()){
             NodeList node = last.getNext();
             for(int i=0;i<tam;i++){
@@ -31,42 +32,58 @@ public class DoubleCircularLinkedList<E> implements List<E> {
         }
     }
     
-    public void addInEmpty(NodeList<E> node) {
+    private boolean addInEmpty(NodeList<E> node) {
+        if(node==null)return false;
+        
         last = node;
         last.setNext(last);
         last.setBef(last);
         tam++;
+        return true;
     }
     
     @Override
-    public boolean addFirst(E e) { 
+    public boolean addFirst(E e) {
+        if(e==null)return false;
         NodeList<E> node = new NodeList(e);
-        if (e == null) {
-            return false;
-        }
         if (isEmpty()) {
             addInEmpty(node);
-        } else {
+        } else if(size()==1){
+            last.setNext(node);
+            last.setBef(node);
+            node.setNext(last);
+            node.setBef(last);
+            tam++;
+        }
+        else {
             NodeList<E> aux = last.getNext();//guarda el actual primer nodo 
             node.setNext(aux);
-            aux.setBef(node);
-            last.setNext(node);
             node.setBef(last);
-            
+            last.setNext(node);
+            aux.setBef(node);
             tam++;
         }
         return true;
     }
 
     @Override
-    public boolean addLast(E e) { //
+    public boolean addLast(E e) {
+        if (e == null) return false;
+        
         NodeList node = new NodeList(e);
-        if (e == null) {
-            return false;
-        }
         if (isEmpty()) {
             addInEmpty(node);
-        } else {
+        }
+        else if(size()==1){
+            NodeList<E> aux = last;
+            aux.setNext(node);
+            aux.setBef(node);
+            node.setNext(aux);
+            node.setBef(aux);
+            last=node;
+            tam++;
+        } 
+        else {
             
             NodeList<E> aux = last; //guarda el actual last
             node.setNext(aux.getNext());
@@ -79,36 +96,74 @@ public class DoubleCircularLinkedList<E> implements List<E> {
         }
         return true;
     }
+    
+    private E removeUnique(){
+        if (isEmpty())return null;
+            E unique=last.getContent();
+            last.setContent(null);
+            last.setBef(null);
+            last.setNext(null);
+            tam--;
+            return unique;
+
+    } 
 
     @Override
     public E removeFirst() {
         if (isEmpty())return null;
+        else if(size()==1)removeUnique();
+        else if(size()==2){
+            NodeList<E> nextLast = last.getNext();
+            E content=nextLast.getContent();
+            nextLast.setBef(null);
+            nextLast.setNext(null);
+            nextLast.setContent(null);
+            tam--;
+            return content;
+        }
         else {
             NodeList<E> nextLast = last.getNext();
+            E content=nextLast.getContent();
             last.setNext(nextLast.getNext());
             nextLast.getNext().setBef(last);
             nextLast.setBef(null);
             nextLast.setNext(null);
+            nextLast.setContent(null);
             tam--;
-            return nextLast.getContent();
+            return content;
         }
+        return null;
     }
 
     @Override
     public E removeLast() {
         if (isEmpty())return null;
+        else if(size()==1)removeUnique();
+        else if(size()==2){
+            NodeList<E> Last = last;
+            E content=Last.getContent();
+            last=Last.getNext();
+            Last.setBef(null);
+            Last.setContent(null);
+            Last.setNext(null);
+            tam--;
+            return content;
+        }
         else {
             NodeList<E> Last = last;
+            E content=Last.getContent();
             last = Last.getBef();
             
             Last.getNext().setBef(Last.getBef()); 
             Last.getBef().setNext(Last.getNext());
             Last.setBef(null);
             Last.setNext(null);
+            Last.setContent(null);
             
             tam--;
-            return Last.getContent();
+            return content;
         }
+        return null;
     }
     
     public E remove(int index) {
@@ -124,6 +179,7 @@ public class DoubleCircularLinkedList<E> implements List<E> {
             n.getNext().setBef(n.getBef());
             n.setNext(null);
             n.setBef(null);
+            n.setContent(null);
             tam--;
             return content;
         }
@@ -148,13 +204,14 @@ public class DoubleCircularLinkedList<E> implements List<E> {
         }
         last.setNext(null);
         last=null;
+        tam=0;
     }
 
     public E get(int index) { //
+        if(isEmpty())return null;
+        else if (index > size()) return null;
         E content;
-        if (index > size()) {
-            return null;
-        } else if(index==0) {
+        if(index==0) {
             content = last.getNext().getContent();
         }else{
             NodeList<E> n = last.getNext();
@@ -168,9 +225,10 @@ public class DoubleCircularLinkedList<E> implements List<E> {
 
     public E set(int index, E element) { //
         E content;
-        if (index > size()) {
-            return null;
-        } else if(index==0) {
+        if (index > size()) return null;
+        else if(element==null)return null;
+        else if(isEmpty())return null;
+        else if(index==0) {
             content = last.getNext().getContent();
             last.getNext().setContent(element);
         }else{
@@ -187,13 +245,17 @@ public class DoubleCircularLinkedList<E> implements List<E> {
 
     @Override
     public String toString() {
-        String result = "";
+        if(isEmpty()) return "[]";
+        String result = "[";
         NodeList<E> n;// nodo viajero
         for (n = last.getNext(); n != null; n = n.getNext()) {
-            result += n.getContent().toString() + ",";
+            result += n.getContent().toString() + ", ";
         }
-        return result;
+        String subStr = result.substring(0, result.length() - 2);
+        subStr += subStr + "]";
+        return subStr;
     }
+    
      private NodeList<E> nodeIndex(int index){
         if(index>tam) return null;
         else{

@@ -14,6 +14,8 @@ public class NodeList<E> {
     private NodeList<E> next;
     private NodeList<E> bef;
 
+    public NodeList() {}
+    
     public NodeList(E content) {
         this.content = content;
         this.next=null;
