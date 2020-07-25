@@ -49,4 +49,9 @@ abstract class Objeto {
         this.image = image;
         
     }
+   
+    public double createRadius(int numeroPersonas){
+        double radio=0;
+        return radio;
+    }
 }

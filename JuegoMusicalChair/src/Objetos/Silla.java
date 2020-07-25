@@ -33,30 +33,40 @@ public class Silla extends Objeto{
     public Silla obtImgS(){
         ImageView image = (new ImageView(new Image("/Imagenes/silla.png")));
       
-        image.setFitWidth(100);
-        image.setFitHeight(100);
+        image.setFitWidth(50);
+        image.setFitHeight(50);
         Silla silla = new Silla(image.getX(),image.getY(),image);
         
         return silla;
     }
     
-    public void ubicar(ImageView persona){
-                                                                                    //// crear un path con esto y hacer mover personas
-        double x=366;
-        double y = 193;
+    public DoubleCircularLinkedList<Silla> ubicar(int numeroPersonas){
+        double angulo = 0;
+        double anguloInc = 360/(numeroPersonas-1);
+        double posx; double posy;
         
-        double radius = 75;
-        int time=5;
+        DoubleCircularLinkedList<Silla> Sillas = new DoubleCircularLinkedList<>();
+        for(int i=0;i<numeroPersonas-1;i++){
+            
+            posx = createRadius(numeroPersonas)*Math.cos(Math.toRadians(angulo));
+            posy = createRadius(numeroPersonas)*Math.sin(Math.toRadians(angulo));
+            
+            angulo+=anguloInc;        
+            
+            Sillas.addLast(obtImgS());
+            Sillas.get(i).getImage().setX(posx+377);
+            Sillas.get(i).getImage().setY(posy+329);
+            
+        }
         
-        orbitalPeriod = 2000.0;
-        portion = (time%orbitalPeriod)/orbitalPeriod;
-        angle=portion*2*Math.PI;
-        totx+=x+radius*Math.cos(angle);
-        toty+=y+radius*Math.sin(angle);
+        return Sillas;
         
-        persona.setX(totx);
-        persona.setY(toty);
-        
-        
+    }
+    
+    @Override
+    public double createRadius(int numeroPersonas){
+        double radio;
+        radio = (numeroPersonas-1)*50;
+        return radio;
     }
 }

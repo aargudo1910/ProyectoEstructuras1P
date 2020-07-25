@@ -26,7 +26,7 @@ import javafx.util.Duration;
 public class Persona extends Objeto {
     
     
-        
+    Silla s = new Silla();
     public Persona(){
         
     }
@@ -46,8 +46,8 @@ public class Persona extends Objeto {
         }
             
         // cambiar posición
-        image.setX(364+150);
-        image.setY(192);
+        image.setX(250);
+        image.setY(350);
         MoverP(image);
         image.setFitWidth(100);
         image.setFitHeight(100);
@@ -67,7 +67,7 @@ public class Persona extends Objeto {
         PathTransition trans = new PathTransition(javafx.util.Duration.millis(10000),p,persona);
         trans.setOrientation(PathTransition.OrientationType.NONE);
         trans.setCycleCount(FadeTransition.INDEFINITE);
-        trans.setDelay(Duration.seconds(2));
+        trans.setDelay(Duration.seconds(10));
         
         trans.play();
         
@@ -77,65 +77,7 @@ public class Persona extends Objeto {
         Path path = new Path();
         MoveTo moveTo;
         LineTo line;
-                
-        int x=0; int y=0; 
-        int a = 450;int b = 350;
         
-        ArrayList<Integer> Lx = new ArrayList<>();
-        ArrayList<Integer> Ly = new ArrayList<>();
-   
-        for(x=200;x<700;x++){
-            for(y=100;y<600;y++){
-                int x2=(x-a)*(x-a); int y2=(y-b)*(y-b);
-                if(x2+y2==62500){
-                    Lx.add(x);
-                    Ly.add(y);
-                }
-            }
-        }
-        
-        moveTo = new MoveTo(Lx.get(0),Ly.get(0)); // X=250 Y=350
-        path.getElements().add(moveTo);
-        int tam = Lx.size();
-        System.out.println(" 1NI\n "+Lx.get(0)+" "+Ly.get(0)+ " "+ Lx.size());
-        
-        for(int i=1;i<tam/2;i++){ 
-            if(Lx.get(i)<a && Ly.get(i)>b){
-                line = new LineTo(Lx.get(i),Ly.get(i));
-                path.getElements().addAll(line);
-                System.out.println(" 1\n "+Lx.get(i)+" "+Ly.get(i));
-            }
-        }
-        
-        line = new LineTo(Lx.get(tam-1),Ly.get(tam-1));
-        path.getElements().addAll(line);
-        System.out.println(" 1mit\n "+Lx.get(tam-1)+" "+Ly.get(tam-1));
-        
-        for(int i=tam-1;i>tam/2;i--){ 
-            if(Lx.get(i)>a && Ly.get(i)>b){
-                line = new LineTo(Lx.get(i),Ly.get(i));
-                path.getElements().addAll(line);
-                System.out.println(" 2\n "+Lx.get(i)+" "+Ly.get(i));
-            }
-             
-        }
-        
-        for(int i=tam-1;i>tam/2;i--){ 
-            if(Lx.get(i)>a && Ly.get(i)<b){
-                line = new LineTo(Lx.get(i),Ly.get(i));
-                path.getElements().addAll(line);
-                System.out.println(" 3\n "+Lx.get(i)+" "+Ly.get(i));
-            }
-             
-        }
-        
-        for(int i=(tam/2)-1;i>0;i--){ 
-            if(Lx.get(i)<a && Ly.get(i)<b){
-                line = new LineTo(Lx.get(i),Ly.get(i));
-                path.getElements().addAll(line);
-                System.out.println(" 4\n "+Lx.get(i)+" "+Ly.get(i));
-            }
-        }
         
         path.setOpacity(0.0);
           
@@ -143,6 +85,11 @@ public class Persona extends Objeto {
         return path;
     }
     
-    
+    @Override
+    public double createRadius(int numeroPersonas){
+        double radio;
+        radio = s.createRadius(numeroPersonas)+100;
+        return radio;
+    }
     
 }

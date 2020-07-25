@@ -107,12 +107,11 @@ public class FXMLDocumentController2 implements Initializable {
             PrincipalPane.getChildren().add(Personas.get(i).getImage());
         }
         
-        DoubleCircularLinkedList<Silla> Sillas = new DoubleCircularLinkedList<>();
+        DoubleCircularLinkedList<Silla> Sillas = sil.ubicar(numPersonas);
         for(int i=0;i<numPersonas-1;i++){
-            Sillas.addLast(sil.obtImgS());
-            sil.ubicar(Sillas.get(i).getImage());
             PrincipalPane.getChildren().add(Sillas.get(i).getImage());
         }
+        
         
         
     }
