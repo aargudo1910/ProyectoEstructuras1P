@@ -66,7 +66,7 @@ public class Silla extends Objeto{
     @Override
     public double createRadius(int numeroPersonas){
         double radio;
-        radio = (numeroPersonas-1)*50;
+        radio = (numeroPersonas-1)*10;
         return radio;
     }
 }

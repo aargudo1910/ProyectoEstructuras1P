@@ -60,8 +60,6 @@ public class FXMLDocumentController2 implements Initializable {
     Persona p = new Persona();
     Silla sil = new Silla();
     Musica mus = new Musica();
-    @FXML
-    private Circle circulo;
    
     /**
      * Initializes the controller class.
@@ -76,6 +74,7 @@ public class FXMLDocumentController2 implements Initializable {
         direcc.setItems(list);
         direcc.setValue("Horario");
         TextPersonas.setText(null);
+        
     }    
 
     @FXML
@@ -101,9 +100,9 @@ public class FXMLDocumentController2 implements Initializable {
         TextPersonas.setVisible(false);
       
         int numPersonas = Integer.parseInt(TextPersonas.getText());
-        DoubleCircularLinkedList<Persona> Personas = new DoubleCircularLinkedList<>();
+        
+        DoubleCircularLinkedList<Persona> Personas = p.ubicar(numPersonas);
         for(int i=0;i<numPersonas;i++){
-            Personas.addLast(p.obtImageRmd());
             PrincipalPane.getChildren().add(Personas.get(i).getImage());
         }
         
@@ -120,7 +119,6 @@ public class FXMLDocumentController2 implements Initializable {
     public void obtDir(ActionEvent event){
         if(TextPersonas.getText()!=null && direcc.getValue()!=null){
             btnEject.setVisible(true);
-            circulo.setVisible(false);
         }
         direcc.setUserData(direcc.getValue());
        
@@ -129,7 +127,6 @@ public class FXMLDocumentController2 implements Initializable {
     private void confirmar(ActionEvent event) {
         if(TextPersonas.getText()!=null && direcc.getValue()!=null){
             btnEject.setVisible(true);
-            circulo.setVisible(false);
         }
     }
 

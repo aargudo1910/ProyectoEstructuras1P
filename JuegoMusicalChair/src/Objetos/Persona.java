@@ -62,27 +62,30 @@ public class Persona extends Objeto {
     }
     
     public void MoverP(ImageView persona){
-
-        Path p = this.createPath();
-        PathTransition trans = new PathTransition(javafx.util.Duration.millis(10000),p,persona);
-        trans.setOrientation(PathTransition.OrientationType.NONE);
-        trans.setCycleCount(FadeTransition.INDEFINITE);
-        trans.setDelay(Duration.seconds(10));
-        
-        trans.play();
         
     }
     
-    public Path createPath(){
-        Path path = new Path();
-        MoveTo moveTo;
-        LineTo line;
+    public DoubleCircularLinkedList<Persona> ubicar(int numeroPersonas){
+        double angulo = 0;
+        double anguloInc = 360/(numeroPersonas);
+        double posx; double posy;
         
+        DoubleCircularLinkedList<Persona> Personas = new DoubleCircularLinkedList<>();
+        for(int i=0;i<numeroPersonas;i++){
+            
+            posx = createRadius(numeroPersonas)*Math.cos(Math.toRadians(angulo));
+            posy = createRadius(numeroPersonas)*Math.sin(Math.toRadians(angulo));
+            
+            angulo+=anguloInc;        
+            
+            Personas.addLast(obtImageRmd());
+            Personas.get(i).getImage().setX(posx+377);
+            Personas.get(i).getImage().setY(posy+329);
+            
+        }
         
-        path.setOpacity(0.0);
-          
+        return Personas;
         
-        return path;
     }
     
     @Override
