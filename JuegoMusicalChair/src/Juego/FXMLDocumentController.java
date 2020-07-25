@@ -31,6 +31,7 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private Label label;
     Musica mus = new Musica();
+    private Stage stage;
     /**
      * Initializes the controller class.
      * @param url
@@ -46,13 +47,22 @@ public class FXMLDocumentController implements Initializable {
         
         ((Node) (event.getSource())).getScene().getWindow().hide();
         Parent root2 = FXMLLoader.load(getClass().getResource("Juego.fxml"));
-        Stage stage = new Stage();
+        stage = new Stage();
         Scene scene = new Scene(root2);
         stage.setScene(scene);
         stage.setTitle("Juego de las sillas");
         stage.show();
         
     }
+
+    public Stage getStage() {
+        return stage;
+    }
+
+    public void setStage(Stage stage) {
+        this.stage = stage;
+    }
+    
 
     
 }

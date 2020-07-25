@@ -16,18 +16,16 @@ import javafx.stage.Stage;
  * @author Desarrollo
  */
 public class juego extends Application {
-    
+
     @Override
     public void start(Stage stage) throws Exception {
-       
+
         Parent root;
-        
+
         root = FXMLLoader.load(getClass().getResource("Empezar.fxml"));
-        
-        
-        
+
         Scene scene = new Scene(root);
-        
+
         stage.setScene(scene);
         stage.show();
     }
@@ -37,7 +35,7 @@ public class juego extends Application {
      */
     public static void main(String[] args) {
         launch(args);
-        
+
     }
-    
+
 }
