@@ -34,14 +34,34 @@ public class Persona extends Objeto {
     }
     
     public Persona obtImageRmd (){
-        ImageView image;
-        int num = generarNumero(99);
-        if(num>0 && num<33){
-            image = (new ImageView(new Image("/Imagenes/Persona2.png")));
-        }else if(num>=33 && num<66){
-            image = (new ImageView(new Image("/Imagenes/Persona3.png")));  
-        }else{
-            image = (new ImageView(new Image("/Imagenes/Persona1.png")));
+        ImageView image = null;
+        int num = generarNumero(8);
+        System.out.println("se imprime "+num);
+        switch (num) {
+            case 0:
+                image = (new ImageView(new Image("/Imagenes/Persona1.png")));
+                break;
+            case 1:
+                image = (new ImageView(new Image("/Imagenes/Persona2.png")));
+                break;
+            case 2:
+                image = (new ImageView(new Image("/Imagenes/Persona3.png")));
+                break;
+            case 3:
+                image = (new ImageView(new Image("/Imagenes/Persona4.png")));
+                break;
+            case 4:
+                image = (new ImageView(new Image("/Imagenes/Persona5.png")));
+                break;
+            case 5:
+                image = (new ImageView(new Image("/Imagenes/Persona6.png")));
+                break;
+            case 6:
+                image = (new ImageView(new Image("/Imagenes/Persona7.png")));
+                break;
+            case 7:
+                image = (new ImageView(new Image("/Imagenes/Persona8.png")));
+                break;
         }
         
         image.setFitWidth(100);
