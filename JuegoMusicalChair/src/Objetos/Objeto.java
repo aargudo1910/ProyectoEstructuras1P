@@ -23,25 +23,26 @@ abstract class Objeto {
         this.posX = posX;
         this.posY = posY;
         this.image = image;
+        
     }
 
-    public double getPosX() {
+    public final double getPosX() {
         return posX;
     }
 
-    public void setPosX(double posX) {
+    public final void setPosX(double posX) {
         this.posX = posX;
     }
 
-    public double getPosY() {
+    public final double getPosY() {
         return posY;
     }
 
-    public void setPosY(double posY) {
+    public final void setPosY(double posY) {
         this.posY = posY;
     }
 
-    public ImageView getImage() {
+    public final ImageView getImage() {
         return image;
     }
 

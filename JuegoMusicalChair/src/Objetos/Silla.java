@@ -6,8 +6,6 @@
 package Objetos;
 
 import DoubleCircularLinkedList.DoubleCircularLinkedList;
-import Juego.FXMLDocumentController2;
-import java.util.Random;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -16,11 +14,7 @@ import javafx.scene.image.ImageView;
  * @author Desarrollo
  */
 public class Silla extends Objeto{
-    double orbitalPeriod ;
-        double portion;
-        double angle;
-        double totx;
-        double toty;
+   
         
     public Silla(){
         
@@ -65,8 +59,6 @@ public class Silla extends Objeto{
     
     @Override
     public double createRadius(int numeroPersonas){
-        double radio;
-        radio = (numeroPersonas-1)*10;
-        return radio;
+        return (numeroPersonas-1)*10;
     }
 }

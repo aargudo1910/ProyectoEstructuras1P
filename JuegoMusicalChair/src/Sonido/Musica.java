@@ -15,7 +15,7 @@ public class Musica {
     private AudioClip Sound;
 
     public Musica() {
-        this.Sound = java.applet.Applet.newAudioClip(getClass().getResource("/Sonido/Cancion.wav"));
+        this.Sound = java.applet.Applet.newAudioClip(getClass().getResource("/Sonido/cancion para persecucion graciosa.wav"));
     }
 
     public AudioClip getSound() {

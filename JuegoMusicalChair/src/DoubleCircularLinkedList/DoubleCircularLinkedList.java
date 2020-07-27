@@ -19,7 +19,6 @@ public class DoubleCircularLinkedList<E> implements List<E> {
         tam=0;
     }
     
-    
     public void mostrarElementos(){
         if(!isEmpty()){
             NodeList node = last.getNext();
@@ -206,7 +205,39 @@ public class DoubleCircularLinkedList<E> implements List<E> {
         last=null;
         tam=0;
     }
-
+    
+    public E getNext(int index) { // índice donde estoy
+        if(isEmpty())return null;
+        else if (index > size()) return null;
+        E content;
+        if(index==0) {
+            content = last.getNext().getNext().getContent();
+        }else{
+            NodeList<E> n = last.getNext();
+            for (int i = 0; i < index; i++) {
+                n = n.getNext().getNext();
+            }
+            content = n.getContent();
+        }
+        return content;
+    }
+    
+    public E getPrevius(int index) { // índice donde estoy
+        if(isEmpty())return null;
+        else if (index > size()) return null;
+        E content;
+        if(index==0) {
+            content = last.getContent();
+        }else{
+            NodeList<E> n = last.getNext();
+            for (int i = size(); i > index; i--) {
+                n = n.getBef().getBef();
+            }
+            content = n.getContent();
+        }
+        return content;
+    }
+    
     public E get(int index) { //
         if(isEmpty())return null;
         else if (index > size()) return null;

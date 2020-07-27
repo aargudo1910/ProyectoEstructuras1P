@@ -5,6 +5,7 @@
  */
 package Juego;
 
+import Sonido.Musica;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -16,16 +17,19 @@ import javafx.stage.Stage;
  * @author Desarrollo
  */
 public class juego extends Application {
-
+    Musica mus = new Musica();
     @Override
     public void start(Stage stage) throws Exception {
-
+        
+        
         Parent root;
-
+        
         root = FXMLLoader.load(getClass().getResource("Empezar.fxml"));
-
+       
+        
+        
         Scene scene = new Scene(root);
-
+        
         stage.setScene(scene);
         stage.show();
     }
@@ -35,7 +39,7 @@ public class juego extends Application {
      */
     public static void main(String[] args) {
         launch(args);
-
+        
     }
-
+    
 }
