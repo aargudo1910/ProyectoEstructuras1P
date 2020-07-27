@@ -23,11 +23,11 @@ public class DoubleCircularLinkedList<E> implements List<E> {
         if(!isEmpty()){
             NodeList node = last.getNext();
             for(int i=0;i<tam;i++){
-                System.out.print(node.getContent()+" ");
+                System.out.print(node.getContent().toString()+" ");
                 node = node.getNext();
             }
         }else{
-            System.out.println("¡Lista vacía!");
+            System.err.println("¡Lista vacía!");
         }
     }
     
@@ -98,12 +98,12 @@ public class DoubleCircularLinkedList<E> implements List<E> {
     
     private E removeUnique(){
         if (isEmpty())return null;
-            E unique=last.getContent();
-            last.setContent(null);
-            last.setBef(null);
-            last.setNext(null);
-            tam--;
-            return unique;
+        E unique=last.getContent();
+        last.setContent(null);
+        last.setBef(null);
+        last.setNext(null);
+        tam--;
+        return unique;
 
     } 
 
@@ -173,14 +173,16 @@ public class DoubleCircularLinkedList<E> implements List<E> {
         
         else {
             NodeList<E> n = nodeIndex(index);
-            E content = n.getContent();
-            n.getBef().setNext(n.getNext());
-            n.getNext().setBef(n.getBef());
-            n.setNext(null);
-            n.setBef(null);
-            n.setContent(null);
-            tam--;
-            return content;
+            if(n.getContent()!=null){
+                E content = n.getContent();
+                n.getBef().setNext(n.getNext());
+                n.getNext().setBef(n.getBef());
+                n.setNext(null);
+                n.setBef(null);
+                n.setContent(null);
+                tam--;
+                return content;
+            }
         }
         return null;
     }
@@ -239,8 +241,7 @@ public class DoubleCircularLinkedList<E> implements List<E> {
     }
     
     public E get(int index) { //
-        if(isEmpty())return null;
-        else if (index > size()) return null;
+        if(isEmpty()&&index > size())return null;
         E content;
         if(index==0) {
             content = last.getNext().getContent();
