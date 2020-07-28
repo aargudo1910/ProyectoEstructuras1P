@@ -132,25 +132,25 @@ public class DoubleCircularLinkedList<E> implements List<E> {
         if (isEmpty())return null;
         else if(size()==1)removeUnique();
         else if(size()==2){
-            NodeList<E> Last = last;
-            E content=Last.getContent();
-            last=Last.getNext();
-            Last.setBef(null);
-            Last.setContent(null);
-            Last.setNext(null);
+            NodeList<E> newLast = last;
+            E content=newLast.getContent();
+            last=newLast.getNext();
+            newLast.setBef(null);
+            newLast.setContent(null);
+            newLast.setNext(null);
             tam--;
             return content;
         }
         else {
-            NodeList<E> Last = last;
-            E content=Last.getContent();
-            last = Last.getBef();
+            NodeList<E> newLast = last;
+            E content=newLast.getContent();
+            last = newLast.getBef();
             
-            Last.getNext().setBef(Last.getBef()); 
-            Last.getBef().setNext(Last.getNext());
-            Last.setBef(null);
-            Last.setNext(null);
-            Last.setContent(null);
+            newLast.getNext().setBef(newLast.getBef()); 
+            newLast.getBef().setNext(newLast.getNext());
+            newLast.setBef(null);
+            newLast.setNext(null);
+            newLast.setContent(null);
             
             tam--;
             return content;
@@ -269,16 +269,17 @@ public class DoubleCircularLinkedList<E> implements List<E> {
         }
         return content;
     }
-
+    
     @Override
     public String toString() {
         if(isEmpty()) return "[]";
-        String result = "[";
+        StringBuilder bld = new StringBuilder ("[");
         NodeList<E> n;// nodo viajero
         for (n = last.getNext(); n != null; n = n.getNext()) {
-            result += n.getContent().toString() + ", ";
+            bld.append (n.getContent().toString() + ", ");
         }
-        String subStr = result.substring(0, result.length() - 2);
+        String str=bld.toString();
+        String subStr = str.substring(0, str.length() - 2);
         subStr += subStr + "]";
         return subStr;
     }

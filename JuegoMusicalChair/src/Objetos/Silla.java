@@ -29,31 +29,35 @@ public class Silla extends Objeto{
       
         image.setFitWidth(50);
         image.setFitHeight(50);
-        Silla silla = new Silla(image.getX(),image.getY(),image);
         
-        return silla;
+        return new Silla(image.getX(),image.getY(),image);
     }
     
     public DoubleCircularLinkedList<Silla> ubicar(int numeroPersonas){
         double angulo = 0;
-        double anguloInc = 360/(numeroPersonas-1);
-        double posx; double posy;
+        double anguloInc;
+        if (numeroPersonas<0) anguloInc=0;
+        else{
+            anguloInc = 360f/(numeroPersonas-1);
+        }
+        double posX; 
+        double posY;
         
-        DoubleCircularLinkedList<Silla> Sillas = new DoubleCircularLinkedList<>();
+        DoubleCircularLinkedList<Silla> sillas = new DoubleCircularLinkedList<>();
         for(int i=0;i<numeroPersonas-1;i++){
             
-            posx = createRadius(numeroPersonas)*Math.cos(Math.toRadians(angulo));
-            posy = createRadius(numeroPersonas)*Math.sin(Math.toRadians(angulo));
+            posX = createRadius(numeroPersonas)*Math.cos(Math.toRadians(angulo));
+            posY = createRadius(numeroPersonas)*Math.sin(Math.toRadians(angulo));
             
             angulo+=anguloInc;        
             
-            Sillas.addLast(obtImgS());
-            Sillas.get(i).getImage().setX(posx+377);
-            Sillas.get(i).getImage().setY(posy+329);
+            sillas.addLast(obtImgS());
+            sillas.get(i).getImage().setX(posX+377);
+            sillas.get(i).getImage().setY(posY+329);
             
         }
         
-        return Sillas;
+        return sillas;
         
     }
     public double createRadius(int numeroPersonas){
