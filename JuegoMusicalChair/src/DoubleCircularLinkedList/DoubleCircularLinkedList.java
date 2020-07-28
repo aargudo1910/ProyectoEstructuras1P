@@ -164,9 +164,10 @@ public class DoubleCircularLinkedList<E> implements List<E> {
         else if(index==size()-1) removeLast();
         
         else {
+            NodeList<E> n=null;
             try{
-                NodeList<E> n = nodeIndex(index);
-                if(n==null){
+                n = nodeIndex(index);
+                if(n!=null){
                     E content = n.getContent();
                     n.getBef().setNext(n.getNext());
                     n.getNext().setBef(n.getBef());
