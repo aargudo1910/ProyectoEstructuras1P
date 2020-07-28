@@ -5,6 +5,9 @@
  */
 package DoubleCircularLinkedList;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Desarrollo
@@ -17,18 +20,6 @@ public class DoubleCircularLinkedList<E> implements List<E> {
     public DoubleCircularLinkedList() {
         this.last = null;
         tam=0;
-    }
-    
-    public void mostrarElementos(){
-        if(!isEmpty()){
-            NodeList node = last.getNext();
-            for(int i=0;i<tam;i++){
-                System.out.print(node.getContent().toString()+" ");
-                node = node.getNext();
-            }
-        }else{
-            System.err.println("¡Lista vacía!");
-        }
     }
     
     private boolean addInEmpty(NodeList<E> node) {
@@ -44,7 +35,8 @@ public class DoubleCircularLinkedList<E> implements List<E> {
     @Override
     public boolean addFirst(E e) {
         if(e==null)return false;
-        NodeList<E> node = new NodeList(e);
+        NodeList<E> node = new NodeList<>();
+        node.setContent(e);
         if (isEmpty()) {
             addInEmpty(node);
         } else if(size()==1){
@@ -69,7 +61,8 @@ public class DoubleCircularLinkedList<E> implements List<E> {
     public boolean addLast(E e) {
         if (e == null) return false;
         
-        NodeList node = new NodeList(e);
+        NodeList<E> node = new NodeList<>();
+        node.setContent(e);
         if (isEmpty()) {
             addInEmpty(node);
         }
@@ -166,22 +159,25 @@ public class DoubleCircularLinkedList<E> implements List<E> {
     }
     
     public E remove(int index) {
-        if (isEmpty()) return null;
-        else if(index>tam)  return null;
+        if (isEmpty()&&index>tam) return null;
         else if(index==0)removeFirst();
         else if(index==size()-1) removeLast();
         
         else {
-            NodeList<E> n = nodeIndex(index);
-            if(n.getContent()!=null){
-                E content = n.getContent();
-                n.getBef().setNext(n.getNext());
-                n.getNext().setBef(n.getBef());
-                n.setNext(null);
-                n.setBef(null);
-                n.setContent(null);
-                tam--;
-                return content;
+            try{
+                NodeList<E> n = nodeIndex(index);
+                if(n==null){
+                    E content = n.getContent();
+                    n.getBef().setNext(n.getNext());
+                    n.getNext().setBef(n.getBef());
+                    n.setNext(null);
+                    n.setBef(null);
+                    n.setContent(null);
+                    tam--;
+                    return content;
+                }
+            }catch(NullPointerException ex){
+                Logger.getLogger(DoubleCircularLinkedList.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         return null;
@@ -209,8 +205,7 @@ public class DoubleCircularLinkedList<E> implements List<E> {
     }
     
     public E getNext(int index) { // índice donde estoy
-        if(isEmpty())return null;
-        else if (index > size()) return null;
+        if(isEmpty()&&index > size())return null;
         E content;
         if(index==0) {
             content = last.getNext().getNext().getContent();
@@ -225,8 +220,7 @@ public class DoubleCircularLinkedList<E> implements List<E> {
     }
     
     public E getPrevius(int index) { // índice donde estoy
-        if(isEmpty())return null;
-        else if (index > size()) return null;
+        if(isEmpty()&&index > size())return null;
         E content;
         if(index==0) {
             content = last.getContent();

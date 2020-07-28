@@ -14,7 +14,10 @@ public class NodeList<E> {
     private NodeList<E> next;
     private NodeList<E> bef;
 
-    public NodeList() {}
+    public NodeList() {
+        this.content = null;
+        this.next=null;
+    }
     
     public NodeList(E content) {
         this.content = content;
@@ -50,10 +53,8 @@ public class NodeList<E> {
         this.bef = bef;
     }
     
-    
-    
-    
-
-    
+    public boolean isEmpty(){
+        return content==null;
+    }
     
 }
