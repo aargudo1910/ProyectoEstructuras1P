@@ -1,13 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Objetos;
 
 import DoubleCircularLinkedList.DoubleCircularLinkedList;
 import Sonido.Musica;
+import java.io.FileNotFoundException;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.animation.PathTransition;
 import javafx.animation.SequentialTransition;
 import javafx.scene.image.Image;
@@ -30,6 +28,7 @@ public class Persona extends Objeto {
     Persona per;
     Musica mus = new Musica();
     int numeroImagen;
+    Random rmd = new Random();
     
     public Persona(){
         
@@ -46,7 +45,7 @@ public class Persona extends Objeto {
         } else {
             num = numeroImg;
         }
-        
+        try{
         switch (num) {
             case 0:
                 image = (new ImageView(new Image("/Imagenes/Persona1.png")));
@@ -72,11 +71,17 @@ public class Persona extends Objeto {
             case 7:
                 image = (new ImageView(new Image("/Imagenes/Persona8.png")));
                 break;
+            default:
+                image = (new ImageView(new Image("/Imagenes/Persona1.png")));
+                break;
         }
         
         image.setFitWidth(100);
         image.setFitHeight(100);
         
+        }catch(NullPointerException ex){
+            Logger.getLogger(DoubleCircularLinkedList.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
         per = new Persona(image.getX(), image.getY(), image);
         per.numeroImagen = num;
@@ -84,11 +89,10 @@ public class Persona extends Objeto {
     }
     
     public int generarNumero(int valor){
-        Random rmd = new Random();
         return rmd.nextInt(valor);
     }
     
-    public void MoverPHor(Persona per, int numPersonas, Double sillaX, Double sillaY) {
+    public void MoverPHor(Persona per, Double sillaX, Double sillaY) {
         
         Path p = this.createPathHorario(550, 650, 150, 150, 1);
         trans.getChildren().add(new PathTransition(javafx.util.Duration.millis(10000), p, per.getImage()));
@@ -104,7 +108,7 @@ public class Persona extends Objeto {
         trans.play();
     }
     
-    public void MoverPAntiHor(Persona per, int numPersonas, Double sillaX, Double sillaY) {
+    public void MoverPAntiHor(Persona per, Double sillaX, Double sillaY) {
 
         Path p = this.createPathAntiHorario(550, 350, 150, 150, 1);
         trans.getChildren().add(new PathTransition(javafx.util.Duration.millis(10000), p, per.getImage()));
@@ -212,13 +216,11 @@ public class Persona extends Objeto {
 
     public DoubleCircularLinkedList<Persona> ubicar(Integer[] imgs, int numeroPersonas, String direccion, DoubleCircularLinkedList<Silla> sillas) {
         double angulo = 0;
-        double posx;
-        double posy;
 
         DoubleCircularLinkedList<Persona> Personas = new DoubleCircularLinkedList<>();
         for (int i = 0; i < numeroPersonas; i++) {
-            posx = createRadius(numeroPersonas) * Math.cos(Math.toRadians(270)) + 371;
-            posy = createRadius(numeroPersonas) * Math.sin(Math.toRadians(angulo)) + 340;
+            double posx = createRadius(numeroPersonas) * Math.cos(Math.toRadians(270)) + 371;
+            double posy = createRadius(numeroPersonas) * Math.sin(Math.toRadians(angulo)) + 340;
             if(imgs != null && imgs[i] != null){
                 Personas.addLast(obtImageRmd(imgs[i]));
             } else {
@@ -229,17 +231,17 @@ public class Persona extends Objeto {
             if (direccion.equals("Horario")) {
                 cambiarPosicion(Personas.get(i), 371, 329 + createRadius(numeroPersonas));
                 if (i == (numeroPersonas - 1)) {
-                    Personas.get(i).MoverPHor(Personas.get(i), numeroPersonas, null, null);
+                    Personas.get(i).MoverPHor(Personas.get(i), null, null);
                 } else {
-                    Personas.get(i).MoverPHor(Personas.get(i), numeroPersonas, sillas.get(i).getImage().getX(), sillas.get(i).getImage().getY());
+                    Personas.get(i).MoverPHor(Personas.get(i), sillas.get(i).getImage().getX(), sillas.get(i).getImage().getY());
                 }
 
             } else if (direccion.equals("AntiHorario")) {
                 cambiarPosicion(Personas.get(i), 450, 350 + s.createRadius(numeroPersonas));
                 if (i == (numeroPersonas - 1)) {
-                    Personas.get(i).MoverPAntiHor(Personas.get(i), numeroPersonas, null, null);
+                    Personas.get(i).MoverPAntiHor(Personas.get(i), null, null);
                 } else {
-                    Personas.get(i).MoverPAntiHor(Personas.get(i), numeroPersonas, sillas.get(i).getImage().getX(), sillas.get(i).getImage().getY());
+                    Personas.get(i).MoverPAntiHor(Personas.get(i), sillas.get(i).getImage().getX(), sillas.get(i).getImage().getY());
                 }
                 
             }
