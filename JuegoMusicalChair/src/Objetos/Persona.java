@@ -101,7 +101,7 @@ public class Persona extends Objeto {
 
         trans.setDelay(Duration.seconds(2));
         trans.setRate(1);
-        trans.playFrom(Duration.seconds(2));
+        trans.play();
     }
     
     public void MoverPAntiHor(Persona per, int numPersonas, Double sillaX, Double sillaY) {
@@ -116,7 +116,7 @@ public class Persona extends Objeto {
 
         trans.setDelay(Duration.seconds(2));
         trans.setRate(1);
-        trans.playFrom(Duration.seconds(2));
+        trans.play();
         
     }
     
