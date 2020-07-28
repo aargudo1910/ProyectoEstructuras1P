@@ -75,15 +75,15 @@ public class Persona extends Objeto {
                 break;
         }
         
-        image.setFitWidth(100);
-        image.setFitHeight(100);
+            image.setFitWidth(100);
+            image.setFitHeight(100);
+
+            per = new Persona(image.getX(), image.getY(), image);
+            per.numeroImagen = num;
         
         }catch(NullPointerException ex){
             Logger.getLogger(DoubleCircularLinkedList.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        per = new Persona(image.getX(), image.getY(), image);
-        per.numeroImagen = num;
         return per;
     }
     
@@ -218,14 +218,12 @@ public class Persona extends Objeto {
         return pathCircle;
 
     }
-
+    
     public DoubleCircularLinkedList<Persona> ubicar(Integer[] imgs, int numeroPersonas, String direccion, int velocidad, DoubleCircularLinkedList<Silla> sillas) {
-        double angulo = 0;
-
+      
         DoubleCircularLinkedList<Persona> Personas = new DoubleCircularLinkedList<>();
         for (int i = 0; i < numeroPersonas; i++) {
-            double posx = createRadius(numeroPersonas) * Math.cos(Math.toRadians(270)) + 371;
-            double posy = createRadius(numeroPersonas) * Math.sin(Math.toRadians(angulo)) + 340;
+            
             if(imgs != null && imgs[i] != null){
                 Personas.addLast(obtImageRmd(imgs[i]));
             } else {
