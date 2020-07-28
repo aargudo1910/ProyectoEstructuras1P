@@ -123,7 +123,7 @@ public class FXMLDocumentController2 extends Thread implements Initializable {
             veloc = 2;
         }
         
-//        Personas = p.ubicar(null, numPersonas, direccion, veloc, Sillas);
+        Personas = p.ubicar(null, numPersonas, direccion, veloc, Sillas);
         for (int i = 0; i < numPersonas; i++) {
             try {
                 TimeUnit.MILLISECONDS.sleep(50);
@@ -148,6 +148,7 @@ public class FXMLDocumentController2 extends Thread implements Initializable {
                 for (int i = 0; i < numPersonas - 1; i++) {
                     PrincipalPane.getChildren().remove(Sillas.get(i).getImage());
                 }
+                
                 btnSigNivel.setVisible(true);
             }
         }));
@@ -207,7 +208,7 @@ public class FXMLDocumentController2 extends Thread implements Initializable {
         
         Sillas = sil.ubicar(numPersonas);
         System.out.println("imgs : " + imgs[0] + "  " + imgs[1] + "  " + imgs[2]);
-//        Personas = p.ubicar(imgs, numPersonas, direccion, veloc, Sillas);
+        Personas = p.ubicar(imgs, numPersonas, direccion, veloc, Sillas);
         for (int i = 0; i < numPersonas; i++) {
             try {
                 TimeUnit.MILLISECONDS.sleep(50);
@@ -261,4 +262,3 @@ public class FXMLDocumentController2 extends Thread implements Initializable {
     }
     
 }
-

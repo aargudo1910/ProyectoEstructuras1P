@@ -2,7 +2,6 @@ package Objetos;
 
 import DoubleCircularLinkedList.DoubleCircularLinkedList;
 import Sonido.Musica;
-import java.io.FileNotFoundException;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -92,7 +91,7 @@ public class Persona extends Objeto {
         return rmd.nextInt(valor);
     }
     
-    public void MoverPHor(Persona per, Double sillaX, Double sillaY) {
+    public void MoverPHor(Persona per, int velocidad, Double sillaX, Double sillaY) {
         
         Path p = this.createPathHorario(550, 650, 150, 150, 1);
         trans.getChildren().add(new PathTransition(javafx.util.Duration.millis(10000), p, per.getImage()));
@@ -104,11 +103,17 @@ public class Persona extends Objeto {
         trans.setCycleCount(1);
 
         trans.setDelay(Duration.seconds(2));
-        trans.setRate(1);
-        trans.play();
+        if(velocidad ==1){
+            trans.setRate(1);
+            trans.play();
+        }else if(velocidad ==2){
+            trans.setRate(1);
+            trans.play();
+        }
+        
     }
     
-    public void MoverPAntiHor(Persona per, Double sillaX, Double sillaY) {
+    public void MoverPAntiHor(Persona per, int velocidad, Double sillaX, Double sillaY) {
 
         Path p = this.createPathAntiHorario(550, 350, 150, 150, 1);
         trans.getChildren().add(new PathTransition(javafx.util.Duration.millis(10000), p, per.getImage()));
@@ -214,7 +219,7 @@ public class Persona extends Objeto {
 
     }
 
-    public DoubleCircularLinkedList<Persona> ubicar(Integer[] imgs, int numeroPersonas, String direccion, DoubleCircularLinkedList<Silla> sillas) {
+    public DoubleCircularLinkedList<Persona> ubicar(Integer[] imgs, int numeroPersonas, String direccion, int velocidad, DoubleCircularLinkedList<Silla> sillas) {
         double angulo = 0;
 
         DoubleCircularLinkedList<Persona> Personas = new DoubleCircularLinkedList<>();
@@ -231,17 +236,17 @@ public class Persona extends Objeto {
             if (direccion.equals("Horario")) {
                 cambiarPosicion(Personas.get(i), 371, 329 + createRadius(numeroPersonas));
                 if (i == (numeroPersonas - 1)) {
-                    Personas.get(i).MoverPHor(Personas.get(i), null, null);
+                    Personas.get(i).MoverPHor(Personas.get(i),velocidad, null, null);
                 } else {
-                    Personas.get(i).MoverPHor(Personas.get(i), sillas.get(i).getImage().getX(), sillas.get(i).getImage().getY());
+                    Personas.get(i).MoverPHor(Personas.get(i), velocidad, sillas.get(i).getImage().getX(), sillas.get(i).getImage().getY());
                 }
 
             } else if (direccion.equals("AntiHorario")) {
                 cambiarPosicion(Personas.get(i), 450, 350 + s.createRadius(numeroPersonas));
                 if (i == (numeroPersonas - 1)) {
-                    Personas.get(i).MoverPAntiHor(Personas.get(i), null, null);
+                    Personas.get(i).MoverPAntiHor(Personas.get(i),velocidad, null, null);
                 } else {
-                    Personas.get(i).MoverPAntiHor(Personas.get(i), sillas.get(i).getImage().getX(), sillas.get(i).getImage().getY());
+                    Personas.get(i).MoverPAntiHor(Personas.get(i),velocidad, sillas.get(i).getImage().getX(), sillas.get(i).getImage().getY());
                 }
                 
             }
