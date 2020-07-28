@@ -107,7 +107,7 @@ public class Persona extends Objeto {
             trans.setRate(1);
             trans.play();
         }else if(velocidad ==2){
-            trans.setRate(1);
+            trans.setRate(2);
             trans.play();
         }
         
@@ -124,37 +124,13 @@ public class Persona extends Objeto {
         trans.setCycleCount(1);
 
         trans.setDelay(Duration.seconds(2));
-        trans.setRate(1);
-        trans.play();
-        
-    }
-    
-    public Path createPath(Persona per, int numeroPersonas) {
-
-        double angulo = Math.atan2(per.getImage().getY(), per.getImage().getX()); //rad
-        double angulof = angulo + Math.toRadians(360);
-        double anguloInc = Math.toRadians(40);
-
-        double posx;
-        double posy;
-        Path path = new Path();
-
-        MoveTo m = new MoveTo(per.getImage().getX(), per.getImage().getY());
-        path.getElements().add(m);
-
-        // HACER UN WHILE
-        while (angulo <= angulof) {
-            angulo += anguloInc;
-            posx = createRadius(numeroPersonas) * Math.cos(angulo);
-            posy = createRadius(numeroPersonas) * Math.sin(angulo);
-
-            LineTo line = new LineTo(377 + posx, 329 + posy);
-            path.getElements().add(line);
+        if(velocidad ==1){
+            trans.setRate(1);
+            trans.play();
+        }else if(velocidad ==2){
+            trans.setRate(2);
+            trans.play();
         }
-        LineTo m1 = new LineTo(per.getImage().getX(), per.getImage().getY());
-        path.getElements().add(m1);
-        return path;
-
     }
     
     private Path createPathHorario(double centerX, double centerY, double radiusX, double radiusY, double rotate) {

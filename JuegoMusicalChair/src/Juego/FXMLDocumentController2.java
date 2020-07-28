@@ -36,7 +36,7 @@ import javafx.util.Duration;
  *
  * @author Desarrollo
  */
-public class FXMLDocumentController2 extends Thread implements Initializable {
+public class FXMLDocumentController2 implements Initializable {
 
     @FXML
     private Label labelPersonas;
@@ -71,7 +71,7 @@ public class FXMLDocumentController2 extends Thread implements Initializable {
     Musica mus = new Musica();
     DoubleCircularLinkedList<Persona> Personas;
     DoubleCircularLinkedList<Silla> Sillas;
-    
+    private String hora="Horario";
 
     /**
      * Initializes the controller class.
@@ -83,10 +83,10 @@ public class FXMLDocumentController2 extends Thread implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         btnEject.setVisible(false);
         btnSigNivel.setVisible(false);
-        ObservableList<String> list = FXCollections.observableArrayList("Horario", "AntiHorario");
+        ObservableList<String> list = FXCollections.observableArrayList(hora, "AntiHorario");
         ObservableList<String> listv = FXCollections.observableArrayList("1", "2");
         direcc.setItems(list);
-        direcc.setValue("Horario");
+        direcc.setValue(hora);
         velocP.setItems(listv);
         velocP.setValue("1");
         TextPersonas.setText(null);
@@ -95,7 +95,8 @@ public class FXMLDocumentController2 extends Thread implements Initializable {
     }
 
     @FXML
-    private void btnEjecutarAccion(ActionEvent event) {
+    private void btnEjecutarAccion(ActionEvent event) throws InterruptedException{
+        numPersonas = Integer.parseInt(TextPersonas.getText());
         
         btnEject.setVisible(false);
         
@@ -107,7 +108,6 @@ public class FXMLDocumentController2 extends Thread implements Initializable {
         String a = "Numero de personas: " + TextPersonas.getText();
         labelPersonas.setText(a);
         TextPersonas.setVisible(false);
-        numPersonas = Integer.parseInt(TextPersonas.getText());
         
         String velocidad = velocP.getSelectionModel().getSelectedItem().toString();
         String b = "Velocidad: "+ velocidad;
@@ -128,7 +128,8 @@ public class FXMLDocumentController2 extends Thread implements Initializable {
             try {
                 TimeUnit.MILLISECONDS.sleep(50);
             } catch (InterruptedException ex) {
-                Logger.getLogger(FXMLDocumentController2.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(FXMLDocumentController2.class.getName()).log(Level.WARNING, "Interrupted!", ex);
+                Thread.currentThread().interrupt();
             }
             PrincipalPane.getChildren().add(Personas.get(i).getImage());
         }
@@ -168,12 +169,11 @@ public class FXMLDocumentController2 extends Thread implements Initializable {
 
         mus.getSound().play();
         lblMusica.setText("ON");
-        System.out.println("ejecutar final");
 
     }
 
     @FXML
-    private void btnSiguiente(ActionEvent event) {
+    private void btnSiguiente(ActionEvent event) throws InterruptedException{
         String velocidad = velocP.getSelectionModel().getSelectedItem().toString();
         numPersonas = numPersonas - 1;
         btnSigNivel.setVisible(false);
@@ -191,11 +191,11 @@ public class FXMLDocumentController2 extends Thread implements Initializable {
             return;
         }
     
-        if (direccion.equals("Horario")) {
+        if (direccion.equals(hora)) {
             direccion = "AntiHorario";
             LabelDireccion.setText("Dirección: AntiHorario");
         } else {
-            direccion = "Horario";
+            direccion = hora;
             LabelDireccion.setText("Dirección: Horario");
         }
         
@@ -207,13 +207,13 @@ public class FXMLDocumentController2 extends Thread implements Initializable {
         }
         
         Sillas = sil.ubicar(numPersonas);
-        System.out.println("imgs : " + imgs[0] + "  " + imgs[1] + "  " + imgs[2]);
         Personas = p.ubicar(imgs, numPersonas, direccion, veloc, Sillas);
         for (int i = 0; i < numPersonas; i++) {
             try {
                 TimeUnit.MILLISECONDS.sleep(50);
             } catch (InterruptedException ex) {
-                Logger.getLogger(FXMLDocumentController2.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(FXMLDocumentController2.class.getName()).log(Level.WARNING, "Interrupted!", ex);
+                Thread.currentThread().interrupt();
             }
             PrincipalPane.getChildren().add(Personas.get(i).getImage());
         }
