@@ -2,5 +2,5 @@ projectKey=JuegoMusicalChair
 serverUrl=http://localhost:9000
 serverVersion=8.4.1.35646
 dashboardUrl=http://localhost:9000/dashboard?id=JuegoMusicalChair
-ceTaskId=AXOTnuxRILSQKIf2E88X
-ceTaskUrl=http://localhost:9000/api/ce/task?id=AXOTnuxRILSQKIf2E88X
+ceTaskId=AXOUigPNILSQKIf2E88c
+ceTaskUrl=http://localhost:9000/api/ce/task?id=AXOUigPNILSQKIf2E88c

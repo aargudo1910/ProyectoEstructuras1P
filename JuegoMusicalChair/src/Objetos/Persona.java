@@ -91,7 +91,7 @@ public class Persona extends Objeto {
         return rmd.nextInt(valor);
     }
     
-    public void MoverPHor(Persona per, int velocidad, Double sillaX, Double sillaY) {
+    public void moverPHor(Persona per, int velocidad, Double sillaX, Double sillaY) {
         
         Path p = this.createPathHorario(550, 650, 150, 150, 1);
         trans.getChildren().add(new PathTransition(javafx.util.Duration.millis(10000), p, per.getImage()));
@@ -107,13 +107,13 @@ public class Persona extends Objeto {
             trans.setRate(1);
             trans.play();
         }else if(velocidad ==2){
-            trans.setRate(1);
+            trans.setRate(2);
             trans.play();
         }
         
     }
     
-    public void MoverPAntiHor(Persona per, int velocidad, Double sillaX, Double sillaY) {
+    public void moverPAntiHor(Persona per, int velocidad, Double sillaX, Double sillaY) {
 
         Path p = this.createPathAntiHorario(550, 350, 150, 150, 1);
         trans.getChildren().add(new PathTransition(javafx.util.Duration.millis(10000), p, per.getImage()));
@@ -124,10 +124,15 @@ public class Persona extends Objeto {
         trans.setCycleCount(1);
 
         trans.setDelay(Duration.seconds(2));
-        trans.setRate(1);
-        trans.play();
-        
-    }    
+
+        if(velocidad ==1){
+            trans.setRate(1);
+            trans.play();
+        }else if(velocidad ==2){
+            trans.setRate(2);
+            trans.play();
+        }
+    }
     
     private Path createPathHorario(double centerX, double centerY, double radiusX, double radiusY, double rotate) {
 
@@ -193,37 +198,37 @@ public class Persona extends Objeto {
     
     public DoubleCircularLinkedList<Persona> ubicar(Integer[] imgs, int numeroPersonas, String direccion, int velocidad, DoubleCircularLinkedList<Silla> sillas) {
       
-        DoubleCircularLinkedList<Persona> Personas = new DoubleCircularLinkedList<>();
+        DoubleCircularLinkedList<Persona> personas = new DoubleCircularLinkedList<>();
         for (int i = 0; i < numeroPersonas; i++) {
             
             if(imgs != null && imgs[i] != null){
-                Personas.addLast(obtImageRmd(imgs[i]));
+                personas.addLast(obtImageRmd(imgs[i]));
             } else {
-                Personas.addLast(obtImageRmd(null));
+                personas.addLast(obtImageRmd(null));
             }
             
 
             if (direccion.equals("Horario")) {
-                cambiarPosicion(Personas.get(i), 371, 329 + createRadius(numeroPersonas));
+                cambiarPosicion(personas.get(i), 371, 329 + createRadius(numeroPersonas));
                 if (i == (numeroPersonas - 1)) {
-                    Personas.get(i).MoverPHor(Personas.get(i),velocidad, null, null);
+                    personas.get(i).moverPHor(personas.get(i),velocidad, null, null);
                 } else {
-                    Personas.get(i).MoverPHor(Personas.get(i), velocidad, sillas.get(i).getImage().getX(), sillas.get(i).getImage().getY());
+                    personas.get(i).moverPHor(personas.get(i), velocidad, sillas.get(i).getImage().getX(), sillas.get(i).getImage().getY());
                 }
 
             } else if (direccion.equals("AntiHorario")) {
-                cambiarPosicion(Personas.get(i), 450, 350 + s.createRadius(numeroPersonas));
+                cambiarPosicion(personas.get(i), 450, 350 + s.createRadius(numeroPersonas));
                 if (i == (numeroPersonas - 1)) {
-                    Personas.get(i).MoverPAntiHor(Personas.get(i),velocidad, null, null);
+                    personas.get(i).moverPAntiHor(personas.get(i),velocidad, null, null);
                 } else {
-                    Personas.get(i).MoverPAntiHor(Personas.get(i),velocidad, sillas.get(i).getImage().getX(), sillas.get(i).getImage().getY());
+                    personas.get(i).moverPAntiHor(personas.get(i),velocidad, sillas.get(i).getImage().getX(), sillas.get(i).getImage().getY());
                 }
                 
             }
 
         }
 
-        return Personas;
+        return personas;
 
     }
     public double createRadius(int numeroPersonas) {
