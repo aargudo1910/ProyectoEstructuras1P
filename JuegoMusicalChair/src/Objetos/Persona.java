@@ -249,8 +249,6 @@ public class Persona extends Objeto {
         return Personas;
 
     }
-  
-    @Override
     public double createRadius(int numeroPersonas) {
         return s.createRadius(numeroPersonas) + 150;
     }

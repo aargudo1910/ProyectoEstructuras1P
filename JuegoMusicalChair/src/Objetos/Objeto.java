@@ -51,8 +51,4 @@ abstract class Objeto {
         
     }
    
-    public double createRadius(int numeroPersonas){
-        double radio=0;
-        return radio;
-    }
 }
