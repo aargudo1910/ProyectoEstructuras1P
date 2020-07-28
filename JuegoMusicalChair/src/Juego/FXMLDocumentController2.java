@@ -62,6 +62,8 @@ public class FXMLDocumentController2 extends Thread implements Initializable {
     private ComboBox velocP;
     @FXML
     private Label LabelVelocidad;
+    @FXML
+    private Label labelNota;
     
     String direccion;
     int numPersonas;
@@ -71,6 +73,9 @@ public class FXMLDocumentController2 extends Thread implements Initializable {
     Musica mus = new Musica();
     DoubleCircularLinkedList<Persona> Personas;
     DoubleCircularLinkedList<Silla> Sillas;
+    @FXML
+    private Button btnValidacion;
+    
     
 
     /**
@@ -92,12 +97,19 @@ public class FXMLDocumentController2 extends Thread implements Initializable {
         TextPersonas.setText(null);
         imgFinal.setVisible(false);
         btnFinal.setVisible(false);
+        btnValidacion.setVisible(false);
+        
     }
 
     @FXML
     private void btnEjecutarAccion(ActionEvent event) {
-        
+        labelNota.setVisible(false);
         btnEject.setVisible(false);
+        numPersonas = Integer.parseInt(TextPersonas.getText());
+        if(numPersonas<=1 || numPersonas>=9){
+            btnValidacion.setVisible(true);
+            return;
+        }
         
         direccion = direcc.getSelectionModel().getSelectedItem().toString();
         String s = "Dirección: " + direccion;
@@ -107,7 +119,6 @@ public class FXMLDocumentController2 extends Thread implements Initializable {
         String a = "Numero de personas: " + TextPersonas.getText();
         labelPersonas.setText(a);
         TextPersonas.setVisible(false);
-        numPersonas = Integer.parseInt(TextPersonas.getText());
         
         String velocidad = velocP.getSelectionModel().getSelectedItem().toString();
         String b = "Velocidad: "+ velocidad;
@@ -259,6 +270,15 @@ public class FXMLDocumentController2 extends Thread implements Initializable {
         mus.getSound().stop();
         btnFinal.setVisible(false);
         
+    }
+
+    @FXML
+    private void btnValidar(ActionEvent event) {
+        btnEject.setVisible(false);
+        direcc.setVisible(true);
+        TextPersonas.setVisible(true);
+        velocP.setVisible(true);
+        btnValidacion.setVisible(false);
     }
     
 }

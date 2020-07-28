@@ -36,15 +36,15 @@
          </font></Label>
       <Button fx:id="btnEject" defaultButton="true" layoutX="370.0" layoutY="329.0" mnemonicParsing="false" onAction="#btnEjecutarAccion" prefHeight="43.0" prefWidth="159.0" text="Ejecutar" textFill="#190101">
          <font>
-            <Font name="Comic Sans MS Bold" size="12.0" />
+            <Font name="Comic Sans MS Bold" size="19.0" />
          </font>
          <effect>
             <Reflection />
          </effect>
       </Button>
-      <Button fx:id="btnSigNivel" defaultButton="true" layoutX="372.0" layoutY="329.0" mnemonicParsing="false" onAction="#btnSiguiente" prefHeight="43.0" prefWidth="159.0" text="SIGUIENTE -&gt;">
+      <Button fx:id="btnSigNivel" defaultButton="true" layoutX="369.0" layoutY="329.0" mnemonicParsing="false" onAction="#btnSiguiente" prefHeight="43.0" prefWidth="159.0" text="SIGUIENTE -&gt;">
          <font>
-            <Font name="Comic Sans MS Bold" size="12.0" />
+            <Font name="Comic Sans MS Bold" size="16.0" />
          </font>
          <effect>
             <Reflection />
@@ -61,7 +61,7 @@
             <Image url="@../Imagenes/musica.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="imgFinal" fitHeight="600.0" fitWidth="500.0" layoutX="186.0" layoutY="184.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="imgFinal" fitHeight="600.0" fitWidth="500.0" layoutX="186.0" layoutY="176.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Imagenes/final.jpeg" />
          </image>
@@ -75,7 +75,7 @@
       </ImageView>
       <Button fx:id="btnFinal" defaultButton="true" layoutX="370.0" layoutY="541.0" mnemonicParsing="false" onAction="#btnFinal" prefHeight="43.0" prefWidth="159.0" style="-fx-background-color: #dc143c;" text="ACEPTAR" textFill="#f8f5f5">
          <font>
-            <Font name="Comic Sans MS Bold" size="12.0" />
+            <Font name="Comic Sans MS Bold" size="18.0" />
          </font>
          <effect>
             <Reflection />
@@ -87,5 +87,18 @@
          </font>
       </Label>
       <ComboBox fx:id="velocP" editable="true" layoutX="722.0" layoutY="625.0" prefHeight="39.0" prefWidth="64.0" promptText="----------------------------------" />
+      <Label fx:id="labelNota" layoutX="207.0" layoutY="103.0" text="Nota: Ingrese entre 2-8 personas">
+         <font>
+            <Font name="Comic Sans MS" size="12.0" />
+         </font>
+      </Label>
+      <Button fx:id="btnValidacion" defaultButton="true" layoutX="261.0" layoutY="351.0" mnemonicParsing="false" onAction="#btnValidar" prefHeight="43.0" prefWidth="337.0" style="-fx-background-color: #dc143c;" text="¡Ingrese una cantidad válida!" textFill="#f8f5f5">
+         <font>
+            <Font name="Comic Sans MS Bold" size="20.0" />
+         </font>
+         <effect>
+            <Reflection />
+         </effect>
+      </Button>
    </children>
 </Pane>
